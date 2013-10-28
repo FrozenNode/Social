@@ -39,10 +39,10 @@ A HybridAuth Package for Laravel
 
 This package comes with several configuration files, and you *must* edit at least one of them.
 
-Before you can run Anvard, you need to publish out the packages config files to your own app - which you can easily do using artisan:
+Before you can run this package, you need to publish the config files to your own app - which you can easily do using artisan:
 
 ```php
-artisan config:publish atticmedia/anvard
+artisan config:publish frozennode/hybridauth
 ```
 
 You will then find the configuration files in your app/config/packages directory.
@@ -50,15 +50,13 @@ You will then find the configuration files in your app/config/packages directory
 
 ### hybridauth.php
 
-Firstly to put in all your service credentials (app id and app secret that you got from Facebook, LinkedIn, etc).
+Be sure to put in all your service credentials (app id and app secret that you got from Facebook, LinkedIn, etc).
 
 This is _almost_ the exact set of configuration used by the HybridAuth library itself, so see their documentation for more information.
 
-The one exception is the "base_url", which Anvard itself specifies based on the Routes it is configured to use.
-
 ### db.php
 
-This file specifies everything related to your database and models.  Anvard expects you to have a users table, and it will create a profiles table for you with the migration.
+This file specifies everything related to your database and models. This package expects you to have a users table, and it will create a profiles table for you with the migration.
 
 Note that you should edit this file *BEFORE YOU RUN THE MIGRATION*, since the migration itself reads this config.
 
@@ -76,20 +74,10 @@ Keys are attribute names from the Profile (which mirrors the original HybridAuth
 >
 > If you are using [Ardent](https://github.com/laravelbook/ardent) to automatically validate models (and stop them from being saved if validation fails) you may want to specify a set of override rules here when creating new Users.
 >
-> For example, we don't have passwords for users created by Anvard, so you could disable the confirmation requirement there.
->
 > #### uservalues
 >
 > This is similar to the profiletousermap, but much more flexible.  You can specify specific values for certain attributes on new Users (i.e. a "role_id" for all "customers"), or even provide a callback to run - the callback will be passed in the new (unsaved) user and the original HybridAuth Adapter profile of values.
 
-### views.php
-
-Anvard provides it's own extremely simple views.  Change this setting to specify your own views instead.
-
 ## Routes
 
-Anvard consumes the following routes:
-
-* anvard
-* anvard/login{provider}
-* anvard/endpoint
+See the routes.php config file to alter the default routes

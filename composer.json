@@ -1,0 +1,40 @@
+{
+    "name": "frozennode/hybridauth",
+    "description": "A HybridAuth implementation for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Hartigan",
+            "email": "jan@frozennode.com",
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/FrozenNode/Laravel-Hybrid-Auth/issues"
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "laravel/framework": "~4",
+        "hybridauth/hybridauth": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Frozennode\\HybridAuth": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "keywords": [
+        "laravel",
+        "hybridauth",
+        "login",
+        "oauth",
+        "social",
+        "openid",
+        "facebook",
+        "google",
+        "twitter",
+        "yahoo"
+    ]
+}

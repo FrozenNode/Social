@@ -1,6 +1,6 @@
 {
-    "name": "frozennode/hybridauth",
-    "description": "A HybridAuth implementation for Laravel",
+    "name": "frozennode/social",
+    "description": "Social is a HybridAuth implementation for Laravel",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/FrozenNode/Laravel-Hybrid-Auth/issues"
+        "issues": "https://github.com/FrozenNode/Social/issues"
     },
     "require": {
         "php": ">=5.3.0",
@@ -21,7 +21,7 @@
             "src/migrations"
         ],
         "psr-0": {
-            "Frozennode\\HybridAuth": "src/"
+            "Frozennode\\Social": "src/"
         }
     },
     "minimum-stability": "dev",

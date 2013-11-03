@@ -1,10 +1,11 @@
-<?php namespace Frozennode\HybridAuth;
+<?php namespace Frozennode\Social;
 
 use Hybrid_Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Frozennode\Social\Social;
 
-class HybridAuthServiceProvider extends ServiceProvider {
+class SocialServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -20,7 +21,7 @@ class HybridAuthServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('frozennode/hybridauth');
+		$this->package('frozennode/social', 'frozennode/social');
 
 		require_once(__DIR__.'/routes.php');
 	}
@@ -33,33 +34,33 @@ class HybridAuthServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->registerHybridAuth();
-		$this->registerAnvard();
+		$this->registerSocial();
 	}
 
 	private function registerHybridAuth()
 	{
 		$this->app['hybridauth'] = $this->app->share(function($app) {
 			$config = $app['config'];
-			$haconfig = $config['hybridauth::hybridauth'];
-			$haconfig['base_url'] = $app['url']->route('hybridauth.routes.endpoint');
+			$haconfig = $config['frozennode/social::hybridauth'];
+			$haconfig['base_url'] = $app['url']->route('social.routes.endpoint');
 			$instance = new Hybrid_Auth($haconfig);
 
 			return $instance;
 		});
 	}
 
-	private function registerAnvard()
+	private function registerSocial()
 	{
-		$this->app['frozennode.hybridauth'] = $this->app->share(function($app)
+		$this->app['frozennode.social'] = $this->app->share(function($app)
 		{
 			$config = array(
-				'db' => $app['config']['hybridauth::db'],
-				'hybridauth' => $app['config']['hybridauth::hybridauth'],
-				'models' => $app['config']['hybridauth::models'],
-				'routes' => $app['config']['hybridauth::routes'],
+				'db' => $app['config']['frozennode/social::db'],
+				'hybridauth' => $app['config']['frozennode/social::hybridauth'],
+				'models' => $app['config']['frozennode/social::models'],
+				'routes' => $app['config']['frozennode/social::routes'],
 			);
-			$instance = new HybridAuth($config);
-			$instance->setLogger($app['log']);
+
+			$instance = new Social($config);
 
 			return $instance;
 		});
@@ -72,6 +73,6 @@ class HybridAuthServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('frozennode.hybridauth', 'hybridauth');
+		return array('frozennode.social', 'hybridauth');
 	}
 }

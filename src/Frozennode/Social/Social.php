@@ -1,4 +1,4 @@
-<?php namespace Frozennode\HybridAuth;
+<?php namespace Frozennode\Social;
 
 use Hybrid_Auth;
 use Hybrid_Provider_Adapter;
@@ -6,7 +6,7 @@ use Hybrid_User_Profile;
 use Illuminate\Log\Writer;
 use Illuminate\Support\Facades\Auth;
 
-class HybridAuth {
+class Social {
 
 	/**
 	 * The package's configuration
@@ -45,7 +45,7 @@ class HybridAuth {
 	protected $logger;
 
 	/**
-	 * Create a new HybridAuth instance
+	 * Create a new Social instance
 	 *
 	 * @param array		$config
 	 */
@@ -176,15 +176,16 @@ class HybridAuth {
 	 */
 	public function attemptAuthentication($provider, Hybrid_Auth $hybridauth)
 	{
-		try
-		{
-			$this->provider = $provider;
+		$this->provider = $provider;
 			$adapter = $hybridauth->authenticate($provider);
 			$this->setAdapter($adapter);
 			$this->setAdapterProfile($adapter->getUserProfile());
 			$profile = $this->findProfile();
 
 			return $profile;
+		try
+		{
+
 		}
 		catch (\Exception $e)
 		{
@@ -234,12 +235,9 @@ class HybridAuth {
 		{
 			//we found an existing user
 			$user = $profile->user()->first();
-			$this->logger->debug('HybridAuth: found a profile, id='.$profile->id);
 		}
 		elseif ($adapter_profile->email)
 		{
-			$this->logger->debug('HybridAuth: could not find profile, looking for email');
-
 			//it's a new profile, but it may not be a new user, so check the users by email
 			$user_builder = call_user_func_array(
 				"$UserModel::where",
@@ -252,8 +250,6 @@ class HybridAuth {
 		//if we haven't found a user, we need to create a new one
 		if (!$user)
 		{
-			$this->logger->debug('HybridAuth: did not find user, creating');
-
 			$user = new $UserModel();
 
 			//map in anything from the profile that we want in the User
@@ -283,7 +279,6 @@ class HybridAuth {
 
 			if (!$user->save($this->config['db']['userrules']))
 			{
-				$this->logger->error('HybridAuth: Failed to save user');
 				return NULL;
 			}
 		}
@@ -301,11 +296,8 @@ class HybridAuth {
 
 		if (!$profile->save())
 		{
-			$this->logger->error('HybridAuth: Failed to save profile');
 			return NULL;
 		}
-
-		$this->logger->info('HybridAuth: Successful login!');
 
 		return $profile;
 	}

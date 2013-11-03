@@ -176,16 +176,15 @@ class Social {
 	 */
 	public function attemptAuthentication($provider, Hybrid_Auth $hybridauth)
 	{
-		$this->provider = $provider;
+		try
+		{
+			$this->provider = $provider;
 			$adapter = $hybridauth->authenticate($provider);
 			$this->setAdapter($adapter);
 			$this->setAdapterProfile($adapter->getUserProfile());
 			$profile = $this->findProfile();
 
 			return $profile;
-		try
-		{
-
 		}
 		catch (\Exception $e)
 		{

@@ -11,7 +11,7 @@ if (Config::get('frozennode/social::routes.login'))
 		function($provider)
 		{
 			$app = app();
-dd('what');
+
 			$profile = $app['frozennode.social']->attemptAuthentication($provider, $app['social']);
 
 			if ($profile)

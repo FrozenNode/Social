@@ -11,13 +11,13 @@ A HybridAuth Package for Laravel
 
 ## Installation
 
-1. Add the dependency to your composer.json file: `"frozennode/hybridauth": "*"`
+1. Add the dependency to your composer.json file: `"frozennode/social": "*"`
 2. Run `php composer.phar install`
-3. Add `'Frozennode\HybridAuth\HybridAuthServiceProvider',` to your `config/app.php` file
-3. Publish the package config `php artisan config:publish frozennode/hybridauth`
-4. Add your service credentials to `app/config/packages/frozennode/hybridauth/hybridauth.php`
-5. Check the `app/config/packages/frozennode/hybridauth/db.php` file to see if you need to customise anything (see [Configuration](#configuration) below for help)
-6. Run the migration `php artisan migrate --package='frozennode/hybridauth'`
+3. Add `'Frozennode\Social\SocialServiceProvider',` to your `config/app.php` file
+3. Publish the package config `php artisan config:publish frozennode/social`
+4. Add your service credentials to `app/config/packages/frozennode/social/hybridauth.php`
+5. Check the `app/config/packages/frozennode/social/db.php` file to see if you need to customise anything (see [Configuration](#configuration) below for help)
+6. Run the migration `php artisan migrate --package='frozennode/social'`
 7. Create the `Profile` model (using a different name if you changed the config)
 8. Set the User to have many Profiles:
 
@@ -42,7 +42,7 @@ This package comes with several configuration files, and you *must* edit at leas
 Before you can run this package, you need to publish the config files to your own app - which you can easily do using artisan:
 
 ```php
-artisan config:publish frozennode/hybridauth
+artisan config:publish frozennode/social
 ```
 
 You will then find the configuration files in your app/config/packages directory.

@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
-class SetupHybridAuth extends Migration {
+class SetupAnvard extends Migration {
 
 	/**
 	 * Run the migrations.
